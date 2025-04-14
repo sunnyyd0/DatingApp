@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">Dating App</a>
+
+    @if (accountService.currentuser()) {
+    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      <li class="nav-item">
+        <a class="nav-link " href="#">Matches</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#">List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#">Messages</a>
+      </li>
+
+
+    </ul>
+    }
+    @if(accountService.currentuser()){
+    <div class="dropdown" dropdown>
+      <a href="#" class="droopdown-toggle text-light" dropdownToggle>Welocome</a>
+      <div class="dropdown-menu" *dropdownMenu>
+        <a class="dropdown-item" href="#">Edit Profile</a>
+        <li class="divider dropdown-divider"></li>
+        <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+
+      </div>
+    </div>
+    }
+
+    @if(!accountService.currentuser()){
+    <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex" role="search">
+      <input class="form-control me-2" type="text" [(ngModel)]="model.username" name="username" placeholder="User Name">
+      <input class="form-control me-2" type="password" [(ngModel)]="model.password" name="password"
+        placeholder="Password">
+      <button class="btn btn-outline-success" type="submit">Login</button>
+    </form>
+    }
+
+
+  </div>
+</nav>
