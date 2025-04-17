@@ -19,16 +19,17 @@ namespace API.Controllers
         
         [HttpPost("register")] // api/register
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto){
-            if(await UserExists(registerDto.Username)){return BadRequest("user alerady exists");}
-                using var hmac=new HMACSHA512();
-                var user=new AppUser{
-                    UserName=registerDto.Username,
-                    PasswordHash=hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                    PasswordSalt=hmac.Key
-                };
-                await context.Users.AddAsync(user);
-                await context.SaveChangesAsync();
-                return Ok(new UserDto{Username=user.UserName,Token=tokenService.CreateToken(user)});
+            return Ok();
+            // if(await UserExists(registerDto.Username)){return BadRequest("user alerady exists");}
+            //     using var hmac=new HMACSHA512();
+            //     var user=new AppUser{
+            //         UserName=registerDto.Username,
+            //         PasswordHash=hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
+            //         PasswordSalt=hmac.Key
+            //     };
+            //     await context.Users.AddAsync(user);
+            //     await context.SaveChangesAsync();
+            //     return Ok(new UserDto{Username=user.UserName,Token=tokenService.CreateToken(user)});
         }
 
 
