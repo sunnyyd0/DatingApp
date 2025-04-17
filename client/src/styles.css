@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+tabset > ul > li {
+  border-radius: 10px;
+}
+tabset > ul > li:hover {
+  background-color: #ea39b8;
+  border-radius: 10px;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.5s;
+  transition-property: all;
+}

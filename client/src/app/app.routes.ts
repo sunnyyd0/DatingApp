@@ -20,7 +20,7 @@ export const routes: Routes = [
         path: 'members',
         component: MemeberListComponent,
       },
-      { path: 'members/:id', component: MemeberDetailComponent },
+      { path: 'members/:username', component: MemeberDetailComponent },
       { path: 'list', component: ListComponent },
       { path: 'messages', component: MessagesComponent },
     ],
