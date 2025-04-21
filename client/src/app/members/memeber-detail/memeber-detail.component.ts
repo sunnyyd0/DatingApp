@@ -29,7 +29,7 @@ export class MemeberDetailComponent implements OnInit {
 
     this.memberService.getMember(username).subscribe({
       next: (member) => {
-        this.member = member?.result;
+        this.member = member;
         this.member?.photos?.map((photo) => {
           this.images.push(new ImageItem({ src: photo.url, thumb: photo.url }));
         });
