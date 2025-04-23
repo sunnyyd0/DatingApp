@@ -14,9 +14,6 @@
   overflow: hidden;
   position: relative;
 }
-.card-img-wrapper ul {
-  display: flex;
-}
 
 .member-icons {
   position: absolute;

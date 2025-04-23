@@ -14,6 +14,8 @@ import { jwtInterceptor } from './_intercepors/jwt.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './_interceptors/loading.interceptor';
 
+import { filter } from 'rxjs';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
