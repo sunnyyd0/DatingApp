@@ -16,6 +16,8 @@ namespace API.Helpers
             CreateMap<AppUser, MemberDto>().ForMember(d=>d.PhotoUrl,o=>{o.MapFrom(s=>s.Photos.SingleOrDefault(x=>x.IsMain)!.Url);}).ForMember(d=>d.Age,o=>{o.MapFrom(s=>s.DateOfBirth.CalculateAge());});
             CreateMap<Photo,PhotoDto>();
             CreateMap<MemberUpdateDto,AppUser>();
+             CreateMap<RegisterDto, AppUser>();
+             CreateMap<string,DateOnly>().ConvertUsing(s=>DateOnly.Parse(s));
         }
         
     }
