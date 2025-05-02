@@ -6,6 +6,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { TitleCasePipe } from '@angular/common';
+import { MemberService } from '../_services/member.service';
 
 @Component({
   selector: 'app-nav',
@@ -24,9 +25,11 @@ export class NavComponent {
   private toastr = inject(ToastrService);
   private router = inject(Router);
   accountService = inject(AcountService);
+  memberservice = inject(MemberService);
   model: any = {};
 
   login() {
+    console.log(this.memberservice.paginatedResult());
     this.accountService.login(this.model).subscribe({
       next: (_) => {
         console.log(this.accountService.currentuser());
@@ -34,10 +37,10 @@ export class NavComponent {
       },
       error: (error) => this.toastr.error(error.error),
     });
-    console.log(this.model);
   }
   logout() {
     this.accountService.logout();
+    this.memberservice.paginatedResult.set(null);
     this.router.navigateByUrl('/');
   }
 }

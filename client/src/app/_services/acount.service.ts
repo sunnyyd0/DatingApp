@@ -4,12 +4,14 @@ import { inject, Injectable, signal } from '@angular/core';
 import { User } from '../_models/user';
 import { map } from 'rxjs';
 import { environment } from '../../environments/environment.development';
+import { MemberService } from './member.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AcountService {
   http = inject(HttpClient);
+  // memberservice = inject(MemberService);
   baseUrl = environment.apiUrl;
   currentuser = signal<User | null>(null);
 
@@ -38,6 +40,7 @@ export class AcountService {
 
   logout() {
     localStorage.removeItem('user');
+    // this.memberservice.paginatedResult.set(null);
     this.currentuser.set(null);
   }
 }

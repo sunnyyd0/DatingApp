@@ -5,11 +5,13 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GalleryModule, GalleryItem, ImageItem } from 'ng-gallery';
+import { TimeagoModule } from 'ngx-timeago';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-memeber-detail',
   standalone: true,
-  imports: [TabsModule, GalleryModule],
+  imports: [TabsModule, GalleryModule, TimeagoModule, DatePipe],
   templateUrl: './memeber-detail.component.html',
   styleUrl: './memeber-detail.component.css',
 })
@@ -29,7 +31,8 @@ export class MemeberDetailComponent implements OnInit {
 
     this.memberService.getMember(username).subscribe({
       next: (member) => {
-        this.member = member;
+        this.member = member.result ? member.result : member;
+
         this.member?.photos?.map((photo) => {
           this.images.push(new ImageItem({ src: photo.url, thumb: photo.url }));
         });

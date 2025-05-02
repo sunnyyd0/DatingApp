@@ -15,6 +15,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './_interceptors/loading.interceptor';
 
 import { filter } from 'rxjs';
+import { TimeagoModule } from 'ngx-timeago';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,6 +25,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAnimations(),
     provideToastr({ positionClass: 'toast-top-right' }),
-    importProvidersFrom(NgxSpinnerModule),
+    importProvidersFrom(NgxSpinnerModule, TimeagoModule.forRoot()),
   ],
 };

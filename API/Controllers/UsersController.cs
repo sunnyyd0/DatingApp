@@ -23,10 +23,11 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>>GetUsers(){
-       
-          return Ok(await userRepository.GetMembersAsync());
-
+        public async Task<ActionResult<IEnumerable<MemberDto>>>GetUsers([FromQuery]UserParams userParams){
+            userParams.CurrentUserName=User.GetUsername();
+            var user = await userRepository.GetMembersAsync(userParams);
+            Response.AddPaginationHeader(user);
+            return Ok(user);
         }
      
         [HttpGet("{username}")]

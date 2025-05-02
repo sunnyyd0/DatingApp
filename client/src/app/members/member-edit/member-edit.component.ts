@@ -14,10 +14,18 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { Form, FormsModule, NgForm } from '@angular/forms';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { PhotoEditorComponent } from '../photo-editor/photo-editor.component';
+import { DatePipe } from '@angular/common';
+import { TimeagoModule } from 'ngx-timeago';
 @Component({
   selector: 'app-member-edit',
   standalone: true,
-  imports: [TabsModule, FormsModule, PhotoEditorComponent],
+  imports: [
+    TabsModule,
+    FormsModule,
+    PhotoEditorComponent,
+    DatePipe,
+    TimeagoModule,
+  ],
   templateUrl: './member-edit.component.html',
   styleUrl: './member-edit.component.css',
 })
@@ -41,7 +49,8 @@ export class MemberEditComponent implements OnInit {
       let username = curUser.username;
       this.memberService.getMember(username).subscribe({
         next: (response) => {
-          this.member = response;
+          this.member = response.result;
+          console.log(this.member);
         },
       });
     }

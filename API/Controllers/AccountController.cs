@@ -27,9 +27,11 @@ namespace API.Controllers
         user.UserName = registerDto.Username.ToLower();
          user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
          user.PasswordSalt = hmac.Key;
+         user.CreatedAt = DateTime.UtcNow;
+         Console.WriteLine(user.CreatedAt);
                 await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();
-                return Ok(new UserDto{Username=user.UserName,KnownAs=user.KnownAs,Token=tokenService.CreateToken(user)});
+                return Ok(new UserDto{Username=user.UserName,Gender=user.Gender,KnownAs=user.KnownAs,Token=tokenService.CreateToken(user)});
         }
 
 
@@ -42,7 +44,7 @@ namespace API.Controllers
             for(var i=0;i<user.PasswordHash.Length;i++){
                 if(computedHash[i]!=user.PasswordHash[i]){return Unauthorized("invalid password");}
             }
-           return Ok(new UserDto{Username=user.UserName,KnownAs=user.KnownAs,Token=tokenService.CreateToken(user),
+           return Ok(new UserDto{Username=user.UserName,Gender=user.Gender,KnownAs=user.KnownAs,Token=tokenService.CreateToken(user),
               PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url});
 
         }
