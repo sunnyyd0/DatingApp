@@ -7,6 +7,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { TitleCasePipe } from '@angular/common';
 import { MemberService } from '../_services/member.service';
+import { UserParams } from '../_models/userPramas';
 
 @Component({
   selector: 'app-nav',
@@ -41,6 +42,7 @@ export class NavComponent {
   logout() {
     this.accountService.logout();
     this.memberservice.paginatedResult.set(null);
+    this.memberservice.userParams.set(new UserParams(null));
     this.router.navigateByUrl('/');
   }
 }

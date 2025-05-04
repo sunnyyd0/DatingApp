@@ -5,13 +5,15 @@ import { User } from '../_models/user';
 import { map } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { MemberService } from './member.service';
+import { LikesService } from './likes.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AcountService {
   http = inject(HttpClient);
-  // memberservice = inject(MemberService);
+  private likeService = inject(LikesService);
+
   baseUrl = environment.apiUrl;
   currentuser = signal<User | null>(null);
 
@@ -19,8 +21,7 @@ export class AcountService {
     return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
       map((user) => {
         if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentuser.set(user);
+          this.setCurrentUser(user);
         }
         return user;
       })
@@ -30,17 +31,22 @@ export class AcountService {
     return this.http.post<User>(this.baseUrl + 'account/register', model).pipe(
       map((user) => {
         if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentuser.set(user);
+          this.setCurrentUser(user);
         }
         return user;
       })
     );
   }
 
+  setCurrentUser(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.currentuser.set(user);
+    this.likeService.getLikesId();
+  }
+
   logout() {
     localStorage.removeItem('user');
-    // this.memberservice.paginatedResult.set(null);
+
     this.currentuser.set(null);
   }
 }

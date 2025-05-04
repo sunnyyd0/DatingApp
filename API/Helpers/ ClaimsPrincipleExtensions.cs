@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Mono.TextTemplating;
 
 namespace API.Helpers
 {
@@ -15,11 +17,11 @@ namespace API.Helpers
          return username;
          }
 
-          public static string GetUserId(this ClaimsPrincipal user){
+          public static int GetUserId(this ClaimsPrincipal user){
             var userId=user.FindFirstValue(ClaimTypes.NameIdentifier)
          ?? throw new Exception("Cannot get userId from token");
          
-         return userId;
+         return int.Parse(userId);
          }
         
     }
