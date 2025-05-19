@@ -18,6 +18,7 @@ namespace API.Helpers
          }
 
           public static int GetUserId(this ClaimsPrincipal user){
+      
             var userId=user.FindFirstValue(ClaimTypes.NameIdentifier)
          ?? throw new Exception("Cannot get userId from token");
          

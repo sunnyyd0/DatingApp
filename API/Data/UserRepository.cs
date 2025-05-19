@@ -45,7 +45,8 @@ namespace API.Data
 
     public async Task<AppUser?> GetUserByIdAsync(int id)
     {
-       return await context.Users.FindAsync(id);
+       var res= await context.Users.FindAsync(id);
+       return res;
     }
 
     public async Task<AppUser?> GetUserByUsernameAsync(string username)
@@ -61,7 +62,8 @@ namespace API.Data
 
     public async Task<bool> SaveAllAsync()
     {
-      return await context.SaveChangesAsync() > 0;
+     var res=await context.SaveChangesAsync() > 0;
+     return res;
     }
 
     public void Update(AppUser user)
